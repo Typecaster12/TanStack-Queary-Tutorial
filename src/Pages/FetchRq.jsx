@@ -12,6 +12,24 @@ const FetchRq = () => {
   const { data, isPending, isError, error } = useQuery({
     queryKey: ["posts"],
     queryFn: postsData,
+
+    //gcTime;
+    gcTime: 10000, //collect the garbage(unused data) after 10seconds;
+
+    //staleTime;
+    /* commented so that i can use polling */
+    /*
+    staleTime: 10000, //keep data fresh for atleast 10 seconds;
+    //there will be no refetch before 10 seconds;
+    */
+
+    //polling;
+    //Polling in TanStack Query means automatically refetching data at a regular time interval;
+    //but if we want to use polling, then staleTime cannot be used;
+    //as it stops the api to refetch,
+    refetchInterval: 1000, //after every one second, refetch the data from server;
+    //above code works only when we are on that page only, if we want it to fetch the data even when we are on the other tab, then we can use;
+    // refetchIntervalInBackground: true,
   });
 
   if (isPending) return <p>Loading...</p>
