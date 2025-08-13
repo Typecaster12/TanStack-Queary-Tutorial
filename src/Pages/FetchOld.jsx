@@ -7,8 +7,17 @@ const FetchOld = () => {
     queryKey: ['foodData', 'chicken_breast'],
     queryFn: getFoodData,
     gcTime: 10000, //collect the garbage after 10seconds;
-    staleTime: 10000, //keep data fresh for atleast 10 seconds;
+    // staleTime: 10000, //keep data fresh for atleast 10 seconds;
     //there will be no refetch before 10 seconds;
+
+    //the concept of polling;
+    //to automatically fetch the data after a perticular innterval of time;
+    refetchInterval: 1000,
+    //fetch the data at every 1 second;
+
+    //when we are on the other tab, and still wants that data still gets fetched
+    //then for that only prpose  we can use; 
+    // refetchIntervalInBackground: true,
   })
 
   if (isPending) return <p>Loading...</p>
